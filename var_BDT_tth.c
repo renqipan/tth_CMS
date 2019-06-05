@@ -39,14 +39,15 @@ delta_phi_bjet="delta_phi_jet:=(abs(bjetPhi_1-bjetPhi_2))*(abs(bjetPhi_1-bjetPhi
 //Declare DataLoader(s)
 TMVA::DataLoader loader("dataset");
 loader.AddVariable("delta_phoj_eta:=pho1_eta-jetEta_1",'F');
-//loader.AddVariable("delta_phoj_phi:=pho1_phi-jetPhi_1",'F');
+loader.AddVariable("delta_phoj_phi:=pho1_phi-jetPhi_1",'F');
 loader.AddVariable("delata_jj_eta:=jetEta_1-jetEta_2",'F');
-//loader.AddVariable("delta_pho_eta:=pho1_eta-pho2_eta",'F');
+loader.AddVariable("delta_pho_eta:=pho1_eta-pho2_eta",'F');
 loader.AddVariable(delta_phi_pho,"delta_phi_pho","",'F');
 loader.AddVariable(delta_phi_jet,"delta_phi_jet","",'F');
 loader.AddVariable("diPhoPt",'F');
-//loader.AddVariable("diPhoEta",'F');
+loader.AddVariable("diPhoEta",'F');
 loader.AddVariable(delta_phi_bjet,'F');
+loader.AddVariable("top1_tt_costheta",'F');  
 
 
 //Setup Dataset(s)
@@ -75,9 +76,40 @@ factory.BookMethod(&loader,TMVA::Types::kBDT, "BDT",
 //Multi-Layer Perceptron (Neural Network)
 factory.BookMethod(&loader, TMVA::Types::kMLP, "MLP",
                    "!H:!V:NeuronType=tanh:VarTransform=N:NCycles=100:HiddenLayers=N+5:TestRate=5:!UseRegulator" );
-//factory.BookMethod(&loader, TMVA::Types::kLikelihood, "Likelihood",
- //                         "H:!V:TransformOutput:PDFInterpol=Spline2:NSmoothSig[0]=20:NSmoothBkg[0]=20:NSmoothBkg[1]=10:NSmooth=1:NAvEvtPerBin=50" );
-//factory.BookMethod(&loader, TMVA::Types::kLD, "LD", "H:!V:VarTransform=None:CreateMVAPdfs:PDFInterpolMVAPdf=Spline2:NbinsMVAPdf=50:NsmoothMVAPdf=10" );
+
+bool useDNN = false; 
+if (useDNN) { 
+    
+     TString layoutString ("Layout=TANH|128,TANH|128,TANH|128,LINEAR");
+
+      // Training strategies.
+      TString training0("LearningRate=1e-1,Momentum=0.9,Repetitions=1,"
+                        "ConvergenceSteps=20,BatchSize=256,TestRepetitions=10,"
+                        "WeightDecay=1e-4,Regularization=L2,"
+                        "DropConfig=0.0+0.5+0.5+0.5, Multithreading=True");
+      TString training1("LearningRate=1e-2,Momentum=0.9,Repetitions=1,"
+                        "ConvergenceSteps=20,BatchSize=256,TestRepetitions=10,"
+                        "WeightDecay=1e-4,Regularization=L2,"
+                        "DropConfig=0.0+0.0+0.0+0.0, Multithreading=True");
+      TString training2("LearningRate=1e-3,Momentum=0.0,Repetitions=1,"
+                        "ConvergenceSteps=20,BatchSize=256,TestRepetitions=10,"
+                        "WeightDecay=1e-4,Regularization=L2,"
+                        "DropConfig=0.0+0.0+0.0+0.0, Multithreading=True");
+      TString trainingStrategyString ("TrainingStrategy=");
+      trainingStrategyString += training0 + "|" + training1 + "|" + training2;
+
+      // General Options.                                                                                                                                                                
+      TString dnnOptions ("!H:V:ErrorStrategy=CROSSENTROPY:VarTransform=None:"
+                          "WeightInitialization=XAVIERUNIFORM");
+      dnnOptions.Append (":"); dnnOptions.Append (layoutString);
+      dnnOptions.Append (":"); dnnOptions.Append (trainingStrategyString);
+
+      dnnOptions += ":Architecture=CPU";
+      factory.BookMethod(&loader, TMVA::Types::kDNN, "DNN_CPU", dnnOptions);
+
+}
+
+
 //Train Methods
 factory.TrainAllMethods();
 //Test and Evaluate Methods
@@ -94,3 +126,5 @@ gPad->Print("var_Significance.png");
 if (!gROOT->IsBatch()) TMVA::TMVAGui(outfileName);
 
 }
+
+

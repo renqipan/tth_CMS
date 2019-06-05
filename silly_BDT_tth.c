@@ -24,7 +24,7 @@ void silly_BDT_tth(){
 TMVA::Tools::Instance();
 auto sigFile = TFile::Open("./ttHiggs0PToGG.root");
 auto bkgFile=TFile::Open("./ttHiggs0MToGG.root");
-TString outfileName( "tth_silly_output.root");
+TString outfileName( "btag_silly_output.root");
 auto outputFile = TFile::Open(outfileName, "RECREATE");
 TMVA::Factory factory("TMVAClassification", outputFile,
                       "!V:ROC:!Correlations:!Silent:Color:!DrawProgressBar:AnalysisType=Classification" );
@@ -46,6 +46,7 @@ loader.AddVariable(delta_phi_jet,"delta_phi_jet","",'F');
 */
 //load input variables
 TMVA::DataLoader loader("dataset_silly");
+/*
 TString  var,pho_vars[3]={"pt","eta","phi"};
 //loop to load the variables of photons 
 for(int ipho=1;ipho<3;ipho++){
@@ -61,6 +62,40 @@ for(int ijet=1;ijet<11;ijet++){
 		loader.AddVariable(jetvar,'F');
 	}
 }
+	loader.AddVariable("top1_phi",'F');
+	loader.AddVariable("top1_eta",'F');
+	loader.AddVariable("top1_pt",'F');
+	loader.AddVariable("top1_m",'F' );
+	loader.AddVariable("top2_phi",'F');
+	loader.AddVariable("top2_eta",'F');
+	loader.AddVariable("top2_pt",'F');
+	loader.AddVariable("top2_m",'F' );
+	loader.AddVariable("top1_tt_costheta",'F');
+*/
+	loader.AddVariable("diPhoPhi");
+	loader.AddVariable("diPhoPtoM",'F');
+	loader.AddVariable("diPhoEta",'F');
+	loader.AddVariable("bjetE_1",'F');
+	loader.AddVariable("bjetPhi_1",'F');
+	loader.AddVariable("bjetEta_1",'F');
+	loader.AddVariable("bjetPt_1",'F');
+
+	loader.AddVariable("bjetPt_2",'F');
+	loader.AddVariable("bjetE_2",'F');
+	loader.AddVariable("bjetPhi_2",'F');
+	loader.AddVariable("bjetEta_2",'F');
+
+//loop to load all the variables of jets 
+TString jetvar,btag,jet_vars[4]={"Pt","Eta","Phi","E"};
+for(int ijet=1;ijet<7;ijet++){
+	btag="btag_"+to_string(ijet);
+	loader.AddVariable(btag);
+	for(int ivar=0;ivar<4;ivar++){
+		jetvar="jet"+jet_vars[ivar]+"_"+to_string(ijet);
+		loader.AddVariable(jetvar,'F');
+	}
+}
+
 
 //Setup Dataset(s)
 TTree *tsignal, *tbackground;
@@ -83,7 +118,7 @@ loader.PrepareTrainingAndTestTree(mycuts, mycutb,
 //Booking Methods
 //Boosted Decision Trees
 factory.BookMethod(&loader,TMVA::Types::kBDT, "BDT",
-                   "!V:NTrees=200:MinNodeSize=5%:MaxDepth=3:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20" );
+                   "!V:NTrees=200:MinNodeSize=2.5%:MaxDepth=3:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=20" );
 
 //Multi-Layer Perceptron (Neural Network)
 factory.BookMethod(&loader, TMVA::Types::kMLP, "MLP",

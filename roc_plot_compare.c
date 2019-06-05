@@ -1,14 +1,14 @@
-void roc_plot(){
-	string fileNames[3]={"btag_silly_output.root","tth_var_output.root","6jets_many_output.root"};
-	string dir_sig[]={"dataset_silly/Method_BDT/BDT/MVA_BDT_S","dataset/Method_BDT/BDT/MVA_BDT_S",
+void roc_plot_compare(){
+	string fileNames[2]={"6jets_many_output.root","10jets_many_output.root"};
+	string dir_sig[]={"dataset_many/Method_BDT/BDT/MVA_BDT_S",
 	"dataset_many/Method_BDT/BDT/MVA_BDT_S"};
-	string dir_bkg[]={"dataset_silly/Method_BDT/BDT/MVA_BDT_B","dataset/Method_BDT/BDT/MVA_BDT_B",
+	string dir_bkg[]={"dataset_many/Method_BDT/BDT/MVA_BDT_B",
 	"dataset_many/Method_BDT/BDT/MVA_BDT_B"};
 	TMultiGraph *mg = new TMultiGraph();
 	auto leg=new TLegend(.7,.7,.9,.9,"Input variables");
-    string legend[3]={"Silly","Var","Many"};
+    string legend[2]={"6 jets","10 jets"};
 	TGraph *g_1,*g_2,*g_3,*g;
-	for(int i=0;i<3;i++){
+	for(int i=0;i<2;i++){
 		TFile *fvar=TFile::Open(fileNames[i].c_str()); 
 		//c_str returns a const char* that points to a null-terminated string (i.e. a C-style string)
 		auto hist_sig=(TH1F*)fvar->Get(dir_sig[i].c_str());
@@ -57,7 +57,7 @@ void roc_plot(){
     mg->Draw("AC"); 
     leg->SetFillColor(0);
 	leg->DrawClone("Same");
-	gPad->Print("ROC_Curve3.png");
+	gPad->Print("ROC_Cuve_jets.png");
 
 
 }

@@ -30,11 +30,11 @@ float momenta(float pp[4]){
 
 }
 void addBranch(){
-	TFile *sigFile = new TFile("./ttHiggs0PToGG.root","update");
+	TFile *sigFile = new TFile("./ttHiggs0MToGG.root","update");
 	//read the top1 top2 information
 	float top1_m,top1_pt,top1_eta,top1_phi;
 	float top2_m,top2_pt,top2_eta,top2_phi;
-	TTree *tree=(TTree *) sigFile->Get("ttH_0P_125_13TeV_TTHHadronicTag");
+	TTree *tree=(TTree *) sigFile->Get("ttH_0M_125_13TeV_TTHHadronicTag");
 	tree->SetBranchAddress("top1_phi",&top1_phi);
 	tree->SetBranchAddress("top1_eta",&top1_eta);
 	tree->SetBranchAddress("top1_pt",&top1_pt);

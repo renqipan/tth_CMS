@@ -5,7 +5,7 @@ TChain *chain2= new  TChain("ttH_0P_125_13TeV_TTHHadronicTag");
 
 chain1->Add("ttHiggs0MToGG.root");
 chain2->Add("ttHiggs0PToGG.root");
-int var_num=10;//define numbers of variables 
+int var_num=12;//define numbers of variables 
 int entry_num1,entry_num2;
 entry_num1=chain1->GetEntries();
 entry_num2=chain2->GetEntries();
@@ -20,13 +20,14 @@ delta_phijet="(abs(jetPhi_1-jetPhi_2))*(abs(jetPhi_1-jetPhi_2)<3.14)+\
 (2*3.14-abs(jetPhi_1-jetPhi_2))*(abs(jetPhi_1-jetPhi_2)>3.14)";
 
 TString v[]={"pho1_eta-jetEta_1",delta_phipho,
-"pho1_phi-jetPhi_1",delta_phibjet,"jetEta_1-jetEta_2","pho1_eta-pho2_eta","diPhoPt","diPhoEta","jetPt_1",delta_phijet };
-float xlow[]={-5,0,-4,0,-5.0,-5.0,0,-5,0,0};
-float xup[]={5,3.5,4,3.5,5.0,5.0,400,5,400,3.5};
+"pho1_phi-jetPhi_1",delta_phibjet,"jetEta_1-jetEta_2","pho1_eta-pho2_eta","diPhoPt","diPhoEta",
+"jetPt_1",delta_phijet,"top1_tt_costheta","bjet_tt_cosphi" };
+float xlow[]={-5,0,-4,0,-5.0,-5.0,0,-5,0,0,-1,-1};
+float xup[]={5,3.5,4,3.5,5.0,5.0,400,5,400,3.5,1,1};
 TString title[]={"#Delta #eta_{#gamma_{1} j_{1}} ",
  "#Delta #phi_{#gamma_{1} #gamma_{2}}","#Delta #phi_{#gamma_{1} j_{1}}",
  "#Delta #phi_{bj_{1}bj_{2}} ","#Delta #eta_{j_{1}j_{2}}",
-"#Delta #eta_{#gamma_{1} #gamma_{2}} ","diPhoPt","diPhoEta","Pt_{j1}","#Delta#phi_{j1j2}"};
+"#Delta #eta_{#gamma_{1} #gamma_{2}} ","diPhoPt","diPhoEta","Pt_{j1}","#Delta#phi_{j1j2}","cos#theta^{t}_{t#bar{t}}","cos#phi^{b}_{t#bar{t}}"};
 for(int i=0;i< var_num;i++) 
 	{ 
 	auto canvas= new TCanvas();// not necessary
