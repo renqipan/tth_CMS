@@ -37,15 +37,15 @@ void tmva_xgboost(){
       g->SetLineColor(2);
       g->SetLineWidth(2);
       mg->Add(g);
-      TLegendEntry* leg_entry=leg->AddEntry(g,"tmva:BDT");
-      leg_entry->SetTextColor(1);
+      TLegendEntry* leg_entry=leg->AddEntry(g,"TMVA:BDT");
+      leg_entry->SetTextColor(2);
 //plot roc curve of xgboost
 
     ifstream infile;
-    infile.open("xgboost.CSV");
+    infile.open("xgboost_weight.CSV");
     if(!infile) cout<<"error"<<endl;
-    int fpr_size=27846;  //define the lenth of fpr and tpr
-    float a[fpr_size][2];  //define a empty array 
+    int fpr_size=60526;  //define the lenth of fpr and tpr
+    float a[fpr_size][2];  //define a empty aray 
 
     if(infile){
         string str;
@@ -66,8 +66,37 @@ void tmva_xgboost(){
       g1->SetLineWidth(2);
       mg->Add(g1);
       TLegendEntry* leg_entry1=leg->AddEntry(g1,"xgboost");
-      leg_entry1->SetTextColor(1);
-	
+      leg_entry1->SetTextColor(3);
+      
+	// plot roc curve of keras
+
+    ifstream infile2;
+    infile2.open("keras_tth.CSV");
+    if(!infile2) cout<<"error"<<endl;
+    int fpr_keras_size=45432;  //define the lenth of fpr and tpr
+    float aa[fpr_keras_size][2];  //define a empty array 
+
+    if(infile2){
+        string str2;
+        float t2;
+        cout<<"write data into an array"<<endl;
+        float *pp=&aa[0][0];
+        while(infile2>>t2){
+            *pp=t2;
+            pp++;
+        }
+    }    
+	std::vector<float> kfpr;
+	std::vector<float> ktpr;
+    for(int i=0;i<fpr_keras_size;i++) kfpr.push_back(1-a[i][0]);
+    for(int i=0;i<fpr_keras_size;i++) ktpr.push_back(a[i][1]);
+     auto g2= new TGraph(fpr_keras_size,&ktpr[0],&kfpr[0]);
+      g2->SetLineColor(4);
+      g2->SetLineWidth(2);
+      mg->Add(g2);
+      TLegendEntry* leg_entry2=leg->AddEntry(g2,"keras:DNN");
+      leg_entry2->SetTextColor(4);
+
 
     mg->SetTitle("Signal efficiency vs. Background rejection");
   	mg->GetXaxis()->SetTitle("Signal efficiency(sensitivity)");
@@ -75,6 +104,7 @@ void tmva_xgboost(){
     mg->Draw("AC"); 
     leg->SetFillColor(0);
 	leg->DrawClone("Same");
+	gPad->SetGrid();
 	gPad->Print("tmva_xgboost.png");
 
 

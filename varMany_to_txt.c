@@ -23,8 +23,10 @@ for(int ijet=1;ijet<7;ijet++){
 		jetvar="jet"+jet_vars[ivar]+"_"+to_string(ijet);
 		varNames.push_back(jetvar);
 	}
-}
+ varNames.push_back("btag_"+to_string(ijet));
 
+}
+/*
     varNames.push_back("top1_phi");
 	varNames.push_back("top1_eta");
 	varNames.push_back("top1_pt");
@@ -33,14 +35,7 @@ for(int ijet=1;ijet<7;ijet++){
 	varNames.push_back("top2_eta");
 	varNames.push_back("top2_pt");
 	varNames.push_back("top2_m" );
-	varNames.push_back("bjetE_1");
-	varNames.push_back("bjetPhi_1");
-	varNames.push_back("bjetEta_1");
-	varNames.push_back("bjetPt_1");
-	varNames.push_back("bjetPt_2");
-	varNames.push_back("bjetE_2");
-	varNames.push_back("bjetPhi_2");
-	varNames.push_back("bjetEta_2");
+
 	//varNames.push_back("helcosthetaZ1_1",'F');
 	varNames.push_back("helcosthetaZ1_3");
 	varNames.push_back("helcosthetaZ1_4");
@@ -56,7 +51,7 @@ for(int ijet=1;ijet<7;ijet++){
 	varNames.push_back("phistarZ2_1");
 	varNames.push_back("phistarZ2_3");
 	varNames.push_back("top1_tt_costheta");
-
+*/
 
 varNames.push_back("diPhoPhi");
 varNames.push_back("diPhoEta");
@@ -121,7 +116,7 @@ if (!infile.is_open())
 		return 0;
 	}
 else{ 
-	   cout<<"reading the sig_values file"<<endl;
+	   cout<<"reading the sig_many_values.csv file"<<endl;
 	   char names[1000],data[1000];
 	   infile.getline(names,1000);
 	   cout<<names<<endl;
@@ -136,5 +131,6 @@ else{
 	  */
 }
 infile.close();
+cout <<num<<" varaibles(including weights) have been written into the files."<<endl;
 
 }
