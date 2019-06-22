@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.5.30)  22 JUN 2019 19:17
+This is LuaTeX, Version 1.0.4 (TeX Live 2017/Debian)  (format=lualatex 2019.5.30)  22 JUN 2019 20:00
  restricted system commands enabled.
 **tth.tex
 (./tth.tex
@@ -34,7 +34,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.068 seconds
+luaotfload | main : initialization completed in 0.065 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2018/02/20 v3.50 A class for typesetting presentations
@@ -1216,7 +1216,7 @@ Here is how much of LuaTeX's memory you used:
  804 words of node memory still in use:
    11 hlist, 6 vlist, 2 rule, 13 glue, 1 kern, 7 penalty, 6 glyph, 22 attribute,
  61 glue_spec, 22 attribute_list, 3 write, 4 pdf_colorstack nodes
-   avail lists: 1:10,2:894,3:296,4:121,5:104,6:455,7:323,8:63,9:241,10:12,11:41
+   avail lists: 1:10,2:894,3:296,4:121,5:104,6:438,7:323,8:63,9:241,10:12,11:41
  28711 multiletter control sequences out of 65536+600000
  49 fonts using 3691103 bytes
  57i,15n,80p,769b,591s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -1227,7 +1227,7 @@ public/lm/lmsans9-regular.otf></usr/share/texmf/fonts/opentype/public/lm/lmsans8
 r/share/texmf/fonts/opentype/public/lm/lmsans10-regular.otf></usr/share/texmf/fo
 nts/opentype/public/lm/lmsans12-regular.otf></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmss9.pfb>
-Output written on tth.pdf (10 pages, 179886 bytes).
+Output written on tth.pdf (10 pages, 179841 bytes).
 
 PDF statistics: 359 PDF objects out of 1000 (max. 8388607)
  303 compressed objects within 4 object streams
