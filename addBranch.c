@@ -7,7 +7,7 @@ float *fun_4p(float particle[4],char p_fisrt){
 	momentum[3]=particle[1]*(1-exp(-2*particle[3]))/(2*exp(-particle[3]));//pz
 	if(p_fisrt=='m')
 	momentum[0]=sqrt(momentum[1]*momentum[1]+momentum[2]*momentum[2]+
-					momentum[3]*momentum[3]+particle[1]*particle[1]);//E
+					momentum[3]*momentum[3]+particle[0]*particle[0]);//E
 	if(p_fisrt=='E') momentum[0]=particle[0];
 	return momentum;
 }
