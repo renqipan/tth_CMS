@@ -1,12 +1,12 @@
 void roc_plot_compare(){
-	string fileNames[2]={"6jets_many_output.root","10jets_many_output.root"};
+	string fileNames[2]={"6jets_many_output.root","photon_many_output.root"};
 	string dir_sig[]={"dataset_many/Method_BDT/BDT/MVA_BDT_S",
 	"dataset_many/Method_BDT/BDT/MVA_BDT_S"};
 	string dir_bkg[]={"dataset_many/Method_BDT/BDT/MVA_BDT_B",
 	"dataset_many/Method_BDT/BDT/MVA_BDT_B"};
 	TMultiGraph *mg = new TMultiGraph();
 	auto leg=new TLegend(.7,.7,.9,.9,"Input variables");
-    string legend[2]={"6 jets","10 jets"};
+    string legend[2]={"diphoton","2 photons"};
 	TGraph *g_1,*g_2,*g_3,*g;
 	for(int i=0;i<2;i++){
 		TFile *fvar=TFile::Open(fileNames[i].c_str()); 
@@ -27,8 +27,8 @@ void roc_plot_compare(){
 		float bkg_integral=hist_bkg->Integral(1,nbins);
 
 		// create containers sig = x points, bkg = y points
-		std::vector<float> sigPoints(nbins);
-		std::vector<float> bkgPoints(nbins);
+		std::vector<float> sigPoints;
+		std::vector<float> bkgPoints;
 
 			for ( int ii = 0; ii < nbins; ++ii ) {
 		  // notice the slice integral is dependent on i!
@@ -57,7 +57,7 @@ void roc_plot_compare(){
     mg->Draw("AC"); 
     leg->SetFillColor(0);
 	leg->DrawClone("Same");
-	gPad->Print("ROC_Cuve_jets.png");
+	gPad->Print("ROC_Curve_photon.png");
 
 
 }

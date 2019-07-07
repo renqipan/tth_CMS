@@ -4,9 +4,9 @@ void tmva_xgboost(){
 	TMultiGraph *mg = new TMultiGraph();
 	auto leg=new TLegend(.7,.7,.9,.9,"Methods");
 	//plot roc curve of tmva
-	string fileName="6jets_many_output.root";
-	string dir_sig="dataset_many/Method_BDT/BDT/MVA_BDT_S";
-	string dir_bkg="dataset_many/Method_BDT/BDT/MVA_BDT_B";
+	string fileName="btag6jets_silly_output.root";
+	string dir_sig="dataset_silly/Method_BDT/BDT/MVA_BDT_S";
+	string dir_bkg="dataset_silly/Method_BDT/BDT/MVA_BDT_B";
 	TFile *fvar=TFile::Open(fileName.c_str()); 
 	auto hist_sig=(TH1F*)fvar->Get(dir_sig.c_str());
 	auto hist_bkg=(TH1F*)fvar->Get(dir_bkg.c_str());
@@ -22,9 +22,9 @@ void tmva_xgboost(){
 	float bkg_integral=hist_bkg->Integral(1,nbins);
 
 		// create containers sig = x points, bkg = y points
-		std::vector<float> sigPoints(nbins);
-		std::vector<float> bkgPoints(nbins);
-		for ( int ii = 0; ii < nbins; ++ii ) {
+		std::vector<float> sigPoints;
+		std::vector<float> bkgPoints;
+		for ( int ii =0; ii < nbins; ++ii ) {
 		  // notice the slice integral is dependent on i!
 		  float sig_slice_integral = hist_sig->Integral(nbins-ii,nbins);
 		  float bkg_slice_integral = hist_bkg->Integral(nbins-ii,nbins);
@@ -44,7 +44,7 @@ void tmva_xgboost(){
     ifstream infile;
     infile.open("xgboost_weight.CSV");
     if(!infile) cout<<"error"<<endl;
-    int fpr_size=60526;  //define the lenth of fpr and tpr
+    int fpr_size=45390;  //define the lenth of fpr and tpr
     float a[fpr_size][2];  //define a empty aray 
 
     if(infile){
@@ -73,7 +73,7 @@ void tmva_xgboost(){
     ifstream infile2;
     infile2.open("keras_tth.CSV");
     if(!infile2) cout<<"error"<<endl;
-    int fpr_keras_size=45432;  //define the lenth of fpr and tpr
+    int fpr_keras_size=45427; //define the lenth of fpr and tpr
     float aa[fpr_keras_size][2];  //define a empty array 
 
     if(infile2){
@@ -88,8 +88,8 @@ void tmva_xgboost(){
     }    
 	std::vector<float> kfpr;
 	std::vector<float> ktpr;
-    for(int i=0;i<fpr_keras_size;i++) kfpr.push_back(1-a[i][0]);
-    for(int i=0;i<fpr_keras_size;i++) ktpr.push_back(a[i][1]);
+    for(int i=0;i<fpr_keras_size;i++) kfpr.push_back(1-aa[i][0]);
+    for(int i=0;i<fpr_keras_size;i++) ktpr.push_back(aa[i][1]);
      auto g2= new TGraph(fpr_keras_size,&ktpr[0],&kfpr[0]);
       g2->SetLineColor(4);
       g2->SetLineWidth(2);
