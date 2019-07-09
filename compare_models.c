@@ -36,7 +36,9 @@ void compare_models(){
 		  bkgPoints.push_back(1-bkg_slice_integral/bkg_integral);
 		  }
 	   auto g= new TGraph(sigPoints.size(),&sigPoints[0],&bkgPoints[0]);
-      g->SetLineColor(i+2);
+	  g->SetMarkerStyle(20);
+	  g->SetMarkerColor(i+2);	
+		g->SetLineColor(i+2);
       g->SetLineWidth(2);
       mg->Add(g);
       TLegendEntry* leg_entry=leg->AddEntry(g,legend[i].c_str());
@@ -49,11 +51,11 @@ void compare_models(){
   	mg->SetTitle("Signal efficiency vs. Background rejection");
   	mg->GetXaxis()->SetTitle("Signal efficiency(sensitivity)");
   	mg->GetYaxis()->SetTitle("Background rejection(specificity)");
-    mg->Draw("AC"); 
+    mg->Draw("ACP");
     leg->SetFillColor(0);
 	leg->DrawClone("Same");
 	gPad->SetGrid();
-	gPad->Print("ROC_Curve_models.png");
+	gPad->Print("ROC_Curve_models_points.png");
 
 
 
