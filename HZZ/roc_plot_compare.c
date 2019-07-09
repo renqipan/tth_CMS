@@ -41,7 +41,7 @@ void roc_plot_compare(){
 
 	  g= new TGraph(sigPoints.size(),&sigPoints[0],&bkgPoints[0]);
 	  g->SetMarkerStyle(20);
-	  g->SetMarkerColor(kBlue);	
+	  g->SetMarkerColor(i+2);	
       g->SetLineColor(i+2);
       g->SetLineWidth(2);
       mg->Add(g);
