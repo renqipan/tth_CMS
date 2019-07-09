@@ -5,3 +5,4 @@
 \beamer@sectionintoc {2}{Apply Machine Learning to Measure Higgs CP via tth}{18}{0}{2}
 \beamer@subsectionintoc {2}{1}{Determine input variables}{18}{0}{2}
 \beamer@subsectionintoc {2}{2}{Response value and ROC curve}{22}{0}{2}
+\beamer@sectionintoc {3}{HZZ Channel }{25}{0}{3}
