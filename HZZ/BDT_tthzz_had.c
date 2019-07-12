@@ -36,26 +36,7 @@ TMVA::DataLoader loader("dataset_hzz_had");
 	loader.AddVariable("ZZPhi",'F');
 	loader.AddVariable("ZZEta",'F');
 	loader.AddVariable("ZZMass",'F');
-	loader.AddVariable("nCleanedJetsPt30");
 
-/*	loader.AddVariable("ExtraLepPt1",'F');
-	loader.AddVariable("ExtraLepPhi1",'F');
-	loader.AddVariable("ExtraLepEta1",'F');
-	loader.AddVariable("ExtraLepPt2",'F');
-	loader.AddVariable("ExtraLepPhi2",'F');
-	loader.AddVariable("ExtraLepEta2",'F');
-	loader.AddVariable("ExtraLepPt",'F');
-	loader.AddVariable("ExtraLepPhi",'F');
-	loader.AddVariable("ExtraLepEta",'F'); 
-	loader.AddVariable("LepPt[0]",'F');
-	loader.AddVariable("LepPhi[0]",'F');
-	loader.AddVariable("LepEta[0]",'F');
-	loader.AddVariable("LepPt[1]",'F');
-	loader.AddVariable("LepPhi[1]",'F');
-	loader.AddVariable("LepEta[1]",'F');
-	loader.AddVariable("LepPt[2]",'F');
-	loader.AddVariable("LepPhi[2]",'F');
-	loader.AddVariable("LepEta[2]",'F');  */
 /*	loader.AddVariable("JetPt[0]",'F');
 	loader.AddVariable("JetPhi[0]",'F');
 	loader.AddVariable("JetMass[0]",'F');

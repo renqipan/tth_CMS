@@ -32,20 +32,14 @@ TMVA::Factory factory("TMVAClassification", outputFile,
 //load input variables
 TMVA::DataLoader loader("dataset_hzz_lep");
 
-	loader.AddVariable("ZZPt",'F');
-	loader.AddVariable("ZZPhi",'F');
-	loader.AddVariable("ZZEta",'F');
-	loader.AddVariable("ZZMass",'F');
+	//loader.AddVariable("ZZPt",'F');
+	//loader.AddVariable("ZZPhi",'F');
+	//loader.AddVariable("ZZEta",'F');
+	//loader.AddVariable("ZZMass",'F');
 	loader.AddVariable("ExtraLepPt1",'F');
 	loader.AddVariable("ExtraLepPhi1",'F');
 	loader.AddVariable("ExtraLepEta1",'F');
-	loader.AddVariable("ExtraLepPt2",'F');
-	loader.AddVariable("ExtraLepPhi2",'F');
-	loader.AddVariable("ExtraLepEta2",'F');
-	loader.AddVariable("ExtraLepPt",'F');
-	loader.AddVariable("ExtraLepPhi",'F');
-	loader.AddVariable("ExtraLepEta",'F');
-	loader.AddVariable("nCleanedJetsPt30");
+	
 	loader.AddVariable("LepPt[0]",'F');
 	loader.AddVariable("LepPhi[0]",'F');
 	loader.AddVariable("LepEta[0]",'F');
@@ -54,30 +48,15 @@ TMVA::DataLoader loader("dataset_hzz_lep");
 	loader.AddVariable("LepEta[1]",'F');
 	loader.AddVariable("LepPt[2]",'F');
 	loader.AddVariable("LepPhi[2]",'F');
-	loader.AddVariable("LepEta[2]",'F');
-/*	loader.AddVariable("JetPt[0]",'F');
-	loader.AddVariable("JetPhi[0]",'F');
-	loader.AddVariable("JetMass[0]",'F');
-	loader.AddVariable("JetEta[0]",'F');
-	loader.AddVariable("JetPt[1]",'F');
-	loader.AddVariable("JetPhi[1]",'F');
-	loader.AddVariable("JetMass[1]",'F');
-	loader.AddVariable("JetEta[1]",'F');
-	loader.AddVariable("JetPt[2]",'F');
-	loader.AddVariable("JetPhi[2]",'F');
-	loader.AddVariable("JetMass[2]",'F');
-	loader.AddVariable("JetEta[2]",'F');
-	loader.AddVariable("JetPt[3]",'F');
-	loader.AddVariable("JetPhi[3]",'F');
-	loader.AddVariable("JetMass[3]",'F');
-	loader.AddVariable("JetEta[3]",'F');
-*/
-
+	loader.AddVariable("LepEta[2]",'F'); 
+	loader.AddVariable("LepPt[3]",'F');
+	loader.AddVariable("LepPhi[3]",'F');
+	loader.AddVariable("LepEta[3]",'F'); 
 
 
 //loop to load all the variables of jets 
 TString jetvar,btag,jet_vars[5]={"Pt","Eta","Phi","Mass","BTagger"};
-for(int ijet=1;ijet<5;ijet++){
+for(int ijet=1;ijet<3;ijet++){
 	for(int ivar=0;ivar<5;ivar++){
 		jetvar="Jet"+jet_vars[ivar]+to_string(ijet);
 		loader.AddVariable(jetvar,'F');
